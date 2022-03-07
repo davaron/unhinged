@@ -132,8 +132,17 @@ int main() {
     for (int i = 0; i < vl.size(); i++) {
         cout << vl[i].attribute << " " << vl[i].value << endl;
     }
-    cout << "yay finished" << endl;
+    cout << "------------------- yay finished ------------------------" << endl;
     MemberDatabase mb;
-    const string mfile = "members.txt";
-    //mb.LoadDatabase(mfile);
+    const string mfile = "mems.txt";
+    if (!mb.LoadDatabase(mfile)) {
+        cout << "Error loading " << mfile << endl;
+        return 1;
+    }
+    AttValPair mince("job", "fervor");
+    vector<string> vect = mb.FindMatchingMembers(mince);
+    for (int i = 0; i < vect.size(); i++) {
+        cout << vect[i] << endl;
+    }
+    //mems.txt contains 9 members
 }

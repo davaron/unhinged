@@ -1,0 +1,32 @@
+Abdullah Fowler
+AbFow2483@charter.net
+3
+job,architect
+trait,dumb
+hobby,knitting
+
+Steeve Giang
+sGv@gmail.com
+2
+job,janitor
+trait,dumb
+
+Jun Taka
+jumpa@gmail.com
+3
+job,fervor
+trait,evil
+hobby,ferkin
+
+Muk Go
+muk@gmail.com
+3
+job,fervor
+trait,dumb
+hobby,ferkin
+
+Loosey Goosey
+losegoes@gmail.com
+2
+job,chef
+trait,nice

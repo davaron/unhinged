@@ -1,11 +1,3 @@
-﻿  AttributeTranslator.cpp
-C:\CS32\project4unhinged\project4unhinged\AttributeTranslator.cpp(14,22): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-C:\CS32\project4unhinged\project4unhinged\main.cpp(132,23): warning C4018: '<': signed/unsigned mismatch
-  MemberDatabase.cpp
-C:\CS32\project4unhinged\project4unhinged\MemberDatabase.cpp(37,23): warning C4018: '<': signed/unsigned mismatch
-  PersonProfile.cpp
-C:\CS32\project4unhinged\project4unhinged\PersonProfile.cpp(10,21): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\PersonProfile.cpp(12,21): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  MemberDatabase.cpp
+C:\CS32\project4unhinged\project4unhinged\MemberDatabase.cpp(44,23): warning C4018: '<': signed/unsigned mismatch
   project4unhinged.vcxproj -> C:\CS32\project4unhinged\Debug\project4unhinged.exe
