@@ -2,18 +2,17 @@
 #define _attributetranslator_
 #include <string>
 #include <vector>
-#include <map>
 #include <list>
+#include "RadixTree.h"
 #include "provided.h"
-using namespace std;
 class AttributeTranslator {
 public:
 	AttributeTranslator() {
 
 	}
-	bool Load(string filename);
-	vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;
+	bool Load(std::string filename);
+	std::vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;
 private:
-	map<string, list<AttValPair>> compatMap;
+	RadixTree<std::list<AttValPair>> compatTree;
 };
 #endif

@@ -27,6 +27,12 @@
     <ClInclude Include="MemberDatabase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RadixTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchMaker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MemberDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchMaker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

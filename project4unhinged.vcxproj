@@ -140,13 +140,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AttributeTranslator.h" />
+    <ClInclude Include="MatchMaker.h" />
     <ClInclude Include="MemberDatabase.h" />
     <ClInclude Include="PersonProfile.h" />
     <ClInclude Include="provided.h" />
+    <ClInclude Include="RadixTree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttributeTranslator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MatchMaker.cpp" />
     <ClCompile Include="MemberDatabase.cpp" />
     <ClCompile Include="PersonProfile.cpp" />
   </ItemGroup>

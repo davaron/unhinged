@@ -1,22 +1,21 @@
 #include "MemberDatabase.h"
 #include <iostream>
-using namespace std;
 
 MemberDatabase::~MemberDatabase() {
-	map<string, PersonProfile*>::const_iterator it = m_database.begin();
+	/*map<string, PersonProfile*>::const_iterator it = m_database.begin();
 	while (it != m_database.end()) {
 		delete it->second;
 		it = m_database.erase(it);
-	}
+	}*/
 }
-bool MemberDatabase::LoadDatabase(string filename) {
-	ifstream file(filename);
-	string str;
+bool MemberDatabase::LoadDatabase(std::string filename) {
+	std::ifstream file(filename);
+	std::string str;
 	while (getline(file, str)) {
 		//construct a new profile and add it to the map
 		if (str != "\n") {
-			string name;
-			string email;
+			std::string name;
+			std::string email;
 			int numAttribs = 0;
 			for(int i = 0; i < 3; i++){
 				switch (i) {
@@ -35,10 +34,10 @@ bool MemberDatabase::LoadDatabase(string filename) {
 				}
 				getline(file, str);
 			}
-			PersonProfile* prof;
+			PersonProfile* prof = new PersonProfile(name, email);
 			for (int i = 0; i < numAttribs; i++) {
-				string attrib;
-				string val;
+				std::string attrib;
+				std::string val;
 				int word = 0;
 				int firstLetter = 0;
 				for (int i = 0; i < str.length(); i++) {
@@ -56,58 +55,37 @@ bool MemberDatabase::LoadDatabase(string filename) {
 				}
 				AttValPair characteristic(attrib, val);
 				AddPair(email, characteristic);
-				prof = new PersonProfile(name, email);
 				(*prof).AddAttValPair(characteristic);
 				getline(file, str);
 			}
-			int dbSize = m_database.size();
-			m_database.insert({ email, prof });
-			if (dbSize == m_database.size()) {
+			if (m_database.search(email) != nullptr) {
 				return false;
 			}
+			m_database.insert(email, prof);
 		}
 	}
 	return true;
 }
-vector<string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const {
-	vector<string> matchingmems;
-	map<string, list<AttValPair>>::const_iterator emailItr = m_emailMap.begin();
-	list<AttValPair>::const_iterator pairListItr = emailItr->second.begin();
-	while (emailItr != m_emailMap.end()) {
-		pairListItr = emailItr->second.begin();
-		while (pairListItr != emailItr->second.end()) {
-			if (*pairListItr == input) {
-				matchingmems.push_back(emailItr->first);
-			}
-			pairListItr++;
-		}
-		emailItr++;
+std::vector<std::string> MemberDatabase::FindMatchingMembers(const AttValPair& input) const {
+	std::vector<std::string> matchingMems;
+	if (m_emailTree.search(input.value) != nullptr) {
+		matchingMems = *(m_emailTree.search(input.value));
 	}
-	return matchingmems;
+	return matchingMems;
 }
 
-const PersonProfile* MemberDatabase::GetMemberByEmail(string email) const {
-	map<string, PersonProfile*>::const_iterator memberMapIt = m_database.begin();
-	while (memberMapIt != m_database.end()) {
-		if (memberMapIt->first == email) {
-			return memberMapIt->second;
-		}
-		memberMapIt++;
-	}
-	return nullptr;
+const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const {
+	return *(m_database.search(email));
 }
 
-void MemberDatabase::AddPair(const string email, const AttValPair& attval) {
-	AttValPair addMe(attval.attribute, attval.value);
-	list<AttValPair> listPairs;
-	if (m_emailMap.find(email) != m_emailMap.end()) {
-		listPairs = (m_emailMap.find(email))->second;
+void MemberDatabase::AddPair(const std::string email, const AttValPair& attval) {
+	std::vector<std::string> listEmails;
+	if (m_emailTree.search(attval.value) != nullptr) {
+		m_emailTree.search(attval.value)->push_back(email);
 	}
-	listPairs.push_back(addMe);
-	int mapSizeBefore = m_emailMap.size();
-	m_emailMap.insert({ email, listPairs });
-	if (mapSizeBefore == m_emailMap.size()) {
-		m_emailMap.erase(email);
-		m_emailMap.insert({ email, listPairs });
+	else {
+		std::vector<std::string> newEmailList;
+		newEmailList.push_back(email);
+		m_emailTree.insert(attval.value, newEmailList);
 	}
 }

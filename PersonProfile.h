@@ -1,18 +1,18 @@
 #ifndef _personprofile_
 #define _personprofile_
 #include <string>
-#include <map>
 #include <list>
+#include <vector>
+#include "RadixTree.h"
 #include "provided.h"
-using namespace std;
 //incorrect implementation, radix tree needed
 class PersonProfile {
 public:
-	PersonProfile(string name, string email) : m_name(name), m_email(email), numAttVals(0) {};
-	string GetName() const {
+	PersonProfile(std::string name, std::string email) : m_name(name), m_email(email), numAttVals(0) {};
+	std::string GetName() const {
 		return m_name;
 	}
-	string GetEmail() const {
+	std::string GetEmail() const {
 		return m_email;
 	}
 	void AddAttValPair(const AttValPair& attval);
@@ -21,9 +21,10 @@ public:
 	}
 	bool GetAttVal(int attribute_num, AttValPair& attval) const;
 private:
-	string m_name;
-	string m_email;
+	std::string m_name;
+	std::string m_email;
 	int numAttVals;
-	map<string, list<AttValPair>> attMap;
+	RadixTree<std::list<AttValPair>> attTree;
+	std::vector<AttValPair> attVec;
 };
 #endif

@@ -1,0 +1,11 @@
+﻿  MatchMaker.cpp
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(30,20): warning C4018: '<': signed/unsigned mismatch
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(32,21): warning C4018: '<': signed/unsigned mismatch
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(41,21): warning C4018: '<': signed/unsigned mismatch
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(48,20): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  3 of 1083 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  project4unhinged.vcxproj -> C:\CS32\project4unhinged\Release\project4unhinged.exe

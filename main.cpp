@@ -2,10 +2,9 @@
 
 #include "PersonProfile.h"
 #include <iostream>
-using namespace std;
 #include "AttributeTranslator.h"
 #include "MemberDatabase.h"
-/*#include "MatchMaker.h"
+#include "MatchMaker.h"
 #include "provided.h"
 #include <iostream>
 #include <string>
@@ -81,13 +80,13 @@ bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
     }
     std::cout << std::endl;
     return true;
-}*/
-
+}
+/*using namespace std;
 int main() {
     //test person profile
     PersonProfile y("Dave", "davertito@gmail.com");
-    cout << y.GetName() << endl;
-    cout << y.GetEmail() << endl;
+    std::cout << y.GetName() << std::endl;
+    std::cout << y.GetEmail() << std::endl;
     AttValPair a("hobby", "dancing");
     AttValPair b("hobby", "sitting");
     AttValPair c("hobby", "basketweaving");
@@ -104,7 +103,7 @@ int main() {
     y.AddAttValPair(j);
     AttValPair d("jobbr", "yobb");
     y.GetAttVal(0, d);
-    cout << d.attribute << ", " << d.value << endl;
+    std::cout << d.attribute << ", " << d.value << endl;
     y.GetAttVal(1, d);
     cout << d.attribute << ", " << d.value << endl;
     y.GetAttVal(2, d);
@@ -139,10 +138,17 @@ int main() {
         cout << "Error loading " << mfile << endl;
         return 1;
     }
+    cout << "begin-- testing pp " << endl;
+    const PersonProfile* pp = mb.GetMemberByEmail("sGv@gmail.com");
+    for (int k = 0; k != pp->GetNumAttValPairs(); k++) {
+        AttValPair av;
+        pp->GetAttVal(k, av);
+        std::cout << av.attribute << " --> " << av.value << std::endl;
+    }
     AttValPair mince("job", "fervor");
     vector<string> vect = mb.FindMatchingMembers(mince);
     for (int i = 0; i < vect.size(); i++) {
         cout << vect[i] << endl;
     }
     //mems.txt contains 9 members
-}
+}*/

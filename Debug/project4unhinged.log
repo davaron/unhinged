@@ -1,3 +1,6 @@
-﻿  MemberDatabase.cpp
-C:\CS32\project4unhinged\project4unhinged\MemberDatabase.cpp(44,23): warning C4018: '<': signed/unsigned mismatch
+﻿  MatchMaker.cpp
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(19,20): warning C4018: '<': signed/unsigned mismatch
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(21,21): warning C4018: '<': signed/unsigned mismatch
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(30,21): warning C4018: '<': signed/unsigned mismatch
+C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(38,20): warning C4018: '<': signed/unsigned mismatch
   project4unhinged.vcxproj -> C:\CS32\project4unhinged\Debug\project4unhinged.exe

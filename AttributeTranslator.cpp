@@ -2,14 +2,15 @@
 #include "AttributeTranslator.h"
 #include <fstream>
 #include <algorithm>
-using namespace std;
-bool AttributeTranslator::Load(string filename) {
-	ifstream file(filename);
-	string str;
+
+#include <iostream>
+bool AttributeTranslator::Load(std::string filename) {
+	std::ifstream file(filename);
+	std::string str;
 	while (getline(file, str)) {
 		if (str != "\n" && str.length() > 0) {
 			int firstLetter = 0;
-			string sAtt, sVal, cAtt, cVal;
+			std::string sAtt, sVal, cAtt, cVal;
 			int word = 0;
 			for (int i = 0; i < str.length(); i++) {
 				if (str[i] == ',' || i == str.length()-1) {
@@ -36,20 +37,16 @@ bool AttributeTranslator::Load(string filename) {
 			}
 			word = 0;
 			firstLetter = 0;
-			//AttValPair src(sAtt, sVal);
 			if (sVal.size() != 0 && cAtt.size() != 0 && cVal.size() != 0)
 			{
 				AttValPair comp(cAtt, cVal);
-				list<AttValPair> setPairs;
-				if (compatMap.find(sVal) != compatMap.end()) {
-					setPairs = compatMap.find(sVal)->second;
+				if (compatTree.search(sVal) != nullptr) {
+					compatTree.search(sVal)->push_back(comp);
 				}
-				setPairs.push_back(comp);
-				int mapSizeBefore = compatMap.size();
-				compatMap.insert({ sVal, setPairs });
-				if (mapSizeBefore == compatMap.size()) {
-					compatMap.erase(sVal);
-					compatMap.insert({ sVal, setPairs });
+				else {
+					std::list<AttValPair> newAttList;
+					newAttList.push_back(comp);
+					compatTree.insert(sVal, newAttList);
 				}
 			}
 			else {
@@ -57,27 +54,18 @@ bool AttributeTranslator::Load(string filename) {
 			}
 		}
 	}
-	if (compatMap.empty()) {
-		return false;
-	}
-	else {
-		return true;
-	}		
+	return true;
 }
 
-vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const{
-	vector<AttValPair> compatPairs;
-	map<string, list<AttValPair>>::const_iterator itr = compatMap.begin();
-	while (itr != compatMap.end()) {
-		if (source.value == itr->first) {
-			list<AttValPair>::const_iterator it = itr->second.begin();
-			while (it != itr->second.end()) {
-				if (find(compatPairs.begin(), compatPairs.end(), *it) == compatPairs.end()) {
-					compatPairs.push_back(*it);
-				}
-				it++;
-			}
-		}
+std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const{
+	std::vector<AttValPair> compatPairs;
+	std::list<AttValPair>* listPtr = compatTree.search(source.value);
+	if (listPtr == nullptr) {
+		return compatPairs;
+	}
+	std::list<AttValPair>::const_iterator itr = listPtr->begin();
+	while (itr != listPtr->end()) {
+		compatPairs.push_back(*itr);
 		itr++;
 	}
 	return compatPairs;
