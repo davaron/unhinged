@@ -58,8 +58,13 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
 				(*prof).AddAttValPair(characteristic);
 				getline(file, str);
 			}
+
+			///////REVERETT ME
 			if (m_database.search(email) != nullptr) {
-				return false;
+				PersonProfile** pa = (m_database.search(email));
+				if ((*pa)->GetEmail() == email) {
+					return false;
+				}		
 			}
 			m_database.insert(email, prof);
 		}
@@ -75,6 +80,10 @@ std::vector<std::string> MemberDatabase::FindMatchingMembers(const AttValPair& i
 }
 
 const PersonProfile* MemberDatabase::GetMemberByEmail(std::string email) const {
+	//std::cout << (m_database.search(email)) << std::endl;
+	if ((m_database.search(email)) == nullptr) {
+		return nullptr;
+	}
 	return *(m_database.search(email));
 }
 

@@ -77,6 +77,7 @@ bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
             std::cout << pp->GetName() << " at " << emailCount.email << " with "
                 << emailCount.count << " matches!" << std::endl;
         }
+        std::cout << "Member had " << emails.size() << " matches! " << std::endl;
     }
     std::cout << std::endl;
     return true;
@@ -120,20 +121,20 @@ int main() {
     cout << "-------------END OF PERSONPROFILE TESTING------------" << endl;
     //test AttributeTranslator
     AttributeTranslator at;
-    const string afile = "trans.txt";
+    const string afile = "translator.txt";
     if (!at.Load(afile))
     {
         cout << "Error loading " << afile << endl;
         return 1;
     }
-    AttValPair sourcer("favorite_food", "del taco");
+    AttValPair sourcer("job", "architect");
     vector<AttValPair> vl = at.FindCompatibleAttValPairs(sourcer);
     for (int i = 0; i < vl.size(); i++) {
         cout << vl[i].attribute << " " << vl[i].value << endl;
     }
     cout << "------------------- yay finished ------------------------" << endl;
     MemberDatabase mb;
-    const string mfile = "mems.txt";
+    const string mfile = "members.txt";
     if (!mb.LoadDatabase(mfile)) {
         cout << "Error loading " << mfile << endl;
         return 1;

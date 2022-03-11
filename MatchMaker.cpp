@@ -4,7 +4,7 @@
 #include <unordered_set>
 #include <map>
 #include <iostream>
-bool operator<(const EmailCount &lhs, const EmailCount &rhs) {
+bool operator<(const EmailCount& lhs, const EmailCount& rhs) {
 	if (lhs.count < rhs.count) {
 		return true;
 	}
@@ -55,7 +55,7 @@ std::vector<EmailCount> MatchMaker::IdentifyRankedMatches(std::string email, int
 	std::map<std::string, int>::iterator mapIt = freqMap.begin();
 	std::vector<EmailCount> matchingEmails;
 	while (mapIt != freqMap.end()) {
-		if (mapIt->second >= threshold) {
+		if (mapIt->second >= threshold && mapIt->first != email) {
 			matchingEmails.push_back(EmailCount(mapIt->first, mapIt->second));
 		}
 		mapIt++;

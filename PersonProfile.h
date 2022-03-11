@@ -1,6 +1,8 @@
 #ifndef _personprofile_
 #define _personprofile_
 #include <string>
+//STORE AS STRINGS AND USE STRING PROCESSORS TO DIVIDE BETWEEN ATTRIBUTE AND VALUE FASTER THIS WAY TRUST
+//deal with duplicate traits
 #include <list>
 #include <vector>
 #include "RadixTree.h"

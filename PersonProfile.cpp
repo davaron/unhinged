@@ -8,9 +8,14 @@ bool PersonProfile::GetAttVal(int attribute_num, AttValPair& attval) const {
 	return true;
 }
 void PersonProfile::AddAttValPair(const AttValPair& attval) {
-	AttValPair addMe(attval.attribute, attval.value);
 	if (attTree.search(attval.attribute) != nullptr) {
-		attTree.search(attval.attribute)->push_back(attval);
+		/*std::list<AttValPair>::iterator it = attTree.search(attval.attribute)->begin();
+		while (it != attTree.search(attval.attribute)->end()) {
+			if (attval.value == it->value) {
+				return;
+			}
+		}*/
+			attTree.search(attval.attribute)->push_back(attval);
 	}
 	else {
 		std::list<AttValPair> newAttList;
