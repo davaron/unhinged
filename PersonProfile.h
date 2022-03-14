@@ -11,7 +11,7 @@
 class PersonProfile {
 public:
 	PersonProfile(std::string name, std::string email) : m_name(name), m_email(email), numAttVals(0) {};
-	std::string GetName() const {
+	std::string GetName() const {	
 		return m_name;
 	}
 	std::string GetEmail() const {

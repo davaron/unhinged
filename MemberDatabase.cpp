@@ -52,7 +52,7 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
 						}
 					}
 				}
-				AttValPair characteristic(attrib, val);
+				AttValPair chacteristic(attrib, val);
 				AddPair(email, characteristic);
 				(*prof).AddAttValPair(characteristic);
 				getline(file, str);

@@ -28,22 +28,19 @@ private:
 	TreeNode* root = nullptr;
 	void insertHere(TreeNode* addMe, TreeNode* n);
 	ValueType* searchFromHere(std::string key, TreeNode* n) const;
+	void postorderCleanUp(TreeNode* tempRoot);
 };
 
 template<typename ValueType>
 inline RadixTree<ValueType>::RadixTree() : root(nullptr)
 {
-
+	std::cout << "construct me dadddy" << std::endl;
 }
 template<typename ValueType>
 inline RadixTree<ValueType>::~RadixTree()
 {
-	/*auto iter = m_map.begin();
-	while (iter != m_map.end()) {
-		delete iter->second;
-		++iter;
-	}
-	*/
+	std::cout << "delete dat tree" << std::endl;
+	postorderCleanUp(root);
 }
 
 //assumes new node is unique
@@ -195,6 +192,17 @@ inline ValueType* RadixTree<ValueType>::searchFromHere(std::string key, TreeNode
 	}
 	else {
 		return searchFromHere(key.substr(matchesUpTo), traverse);
+	}
+}
+template<typename ValueType>
+inline void RadixTree<ValueType>::postorderCleanUp(TreeNode* tempRoot) {
+	if (tempRoot != nullptr) {
+		for (int i = 0; i < 128; i++) {
+			if (tempRoot->edges[i] != nullptr) {
+				postorderCleanUp(tempRoot->edges[i]);
+			}
+		}
+		delete tempRoot;
 	}
 }
 #endif
