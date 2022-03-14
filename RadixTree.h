@@ -34,12 +34,10 @@ private:
 template<typename ValueType>
 inline RadixTree<ValueType>::RadixTree() : root(nullptr)
 {
-	std::cout << "construct me dadddy" << std::endl;
 }
 template<typename ValueType>
 inline RadixTree<ValueType>::~RadixTree()
 {
-	std::cout << "delete dat tree" << std::endl;
 	postorderCleanUp(root);
 }
 
@@ -47,9 +45,6 @@ inline RadixTree<ValueType>::~RadixTree()
 template<typename ValueType>
 inline void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
 {
-	if (search(key) != nullptr) {
-		return;
-	}
 	TreeNode* NodeToBeAdded = new TreeNode();
 	NodeToBeAdded->key = key;
 	NodeToBeAdded->value = value;
