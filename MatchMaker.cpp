@@ -16,28 +16,46 @@ bool operator<(const EmailCount& lhs, const EmailCount& rhs) {
 	}
 }
 std::vector<EmailCount> MatchMaker::IdentifyRankedMatches(std::string email, int threshold) const {
-	const PersonProfile* member = (m_mdb.GetMemberByEmail(email));
+	const PersonProfile* member = (m_mdb->GetMemberByEmail(email));
 	std::vector<AttValPair> attVector;
 	AttValPair avp;
 	int k = 0;
+	std::vector<AttValPair> compatVec;
+	std::unordered_set<std::string> setOfCompatibleAttValPairs;
 	while ((*member).GetAttVal(k, avp)) {
-		attVector.push_back(avp);
+		compatVec = m_at->FindCompatibleAttValPairs(avp);
+		for (int j = 0; j < compatVec.size(); j++) {
+			setOfCompatibleAttValPairs.insert(compatVec[j].attribute + "," + compatVec[j].value);
+		}
 		k++;
 	}
 	//consolidated set of attribute value pairs with no duplicates
 	//all compatible attributes with target profile
-	std::map<std::string, AttValPair> pairSet;
-	for (int i = 0; i < attVector.size(); i++) {
-		std::vector<AttValPair> compatVec = m_at.FindCompatibleAttValPairs(attVector[i]);
-		for (int j = 0; j < compatVec.size(); j++) {
-			pairSet.insert({ compatVec[j].value, compatVec[j] });
-		}
-	}
-	std::map<std::string, AttValPair>::iterator it = pairSet.begin();
+
 	//emails
+	std::unordered_set<std::string>::iterator it = setOfCompatibleAttValPairs.begin();
 	std::vector<std::string> compatMembers;
-	while (it != pairSet.end()) {
-		std::vector<std::string> matchingMembers = m_mdb.FindMatchingMembers((*it).second);
+	while (it != setOfCompatibleAttValPairs.end())
+	{
+		int firstLetter = 0;
+		bool isSource = true;
+		//parsing the set of strings of compatible attribute value pairs
+		for (int i = 0; i < (*it).length(); i++) {
+			if ((*it)[i] == ',' || i == (it->length() - 1)) {
+				if (isSource) {
+					avp.attribute = it->substr(firstLetter, i - firstLetter);
+					firstLetter = i + 1;
+					isSource = false;
+				}
+				if (!isSource) {
+					avp.value = it->substr(firstLetter, i - firstLetter);
+					break;
+				}
+			}
+		}
+		//vector of compatible members, contains duplicates because it can track how many matches
+
+		std::vector<std::string> matchingMembers = m_mdb->FindMatchingMembers(avp);
 		for (int i = 0; i < matchingMembers.size(); i++) {
 			compatMembers.push_back(matchingMembers[i]);
 		}

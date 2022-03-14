@@ -39,14 +39,14 @@ bool AttributeTranslator::Load(std::string filename) {
 			firstLetter = 0;
 			if (sVal.size() != 0 && cAtt.size() != 0 && cVal.size() != 0)
 			{
-				AttValPair comp(cAtt, cVal);
+				std::string compatiblePair = cAtt + "," + cVal;
 				if (compatTree.search(sVal) != nullptr) {
-					compatTree.search(sVal)->push_back(comp);
+					compatTree.search(sVal)->insert(compatiblePair);
 				}
 				else {
-					std::list<AttValPair> newAttList;
-					newAttList.push_back(comp);
-					compatTree.insert(sVal, newAttList);
+					std::unordered_set<std::string> compatSet;
+					compatSet.insert(compatiblePair);
+					compatTree.insert(sVal, compatSet);
 				}
 			}
 			else {
@@ -59,13 +59,32 @@ bool AttributeTranslator::Load(std::string filename) {
 
 std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const{
 	std::vector<AttValPair> compatPairs;
-	std::list<AttValPair>* listPtr = compatTree.search(source.value);
-	if (listPtr == nullptr) {
+	std::unordered_set<std::string>* setPtr = compatTree.search(source.value);
+	if (setPtr == nullptr) {
 		return compatPairs;
 	}
-	std::list<AttValPair>::const_iterator itr = listPtr->begin();
-	while (itr != listPtr->end()) {
-		compatPairs.push_back(*itr);
+	std::unordered_set<std::string>::const_iterator itr = setPtr->begin();
+	while (itr != setPtr->end()) {
+		std::string compatSource, compatValue;
+		int firstLetter = 0;
+		bool isSource = true;
+		for (int i = 0; i < (*itr).length(); i++) {
+			if ((*itr)[i] == ',' || i == (itr->length() - 1)) {
+				if (isSource) {
+					compatSource = itr->substr(firstLetter, i - firstLetter);
+					firstLetter = i + 1;
+					isSource = false;
+				}
+				if (!isSource) {
+					compatValue = itr->substr(firstLetter, i - firstLetter);
+					break;
+				}
+			}
+		}
+		AttValPair insertMe;
+		insertMe.attribute = compatSource;
+		insertMe.value = compatValue;
+		compatPairs.push_back(insertMe);
 		itr++;
 	}
 	return compatPairs;

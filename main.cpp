@@ -58,7 +58,7 @@ bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
         pp->GetAttVal(k, av);
         std::cout << av.attribute << " --> " << av.value << std::endl;
     }
-
+    std::cout << pp->GetNumAttValPairs() << std::endl;
     // Prompt user for threshold
     int threshold;
     std::cout << "How many shared attributes must matches have? ";
@@ -82,8 +82,8 @@ bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)
     std::cout << std::endl;
     return true;
 }
-/*using namespace std;
-int main() {
+using namespace std;
+/*int main() {
     //test person profile
     PersonProfile y("Dave", "davertito@gmail.com");
     std::cout << y.GetName() << std::endl;
@@ -140,16 +140,39 @@ int main() {
         return 1;
     }
     cout << "begin-- testing pp " << endl;
-    const PersonProfile* pp = mb.GetMemberByEmail("sGv@gmail.com");
+    const PersonProfile* pp = mb.GetMemberByEmail("MHa7@sky.com");
     for (int k = 0; k != pp->GetNumAttValPairs(); k++) {
         AttValPair av;
         pp->GetAttVal(k, av);
         std::cout << av.attribute << " --> " << av.value << std::endl;
     }
+    MemberDatabase kb;
+    const string pfile = "mems.txt";
+    kb.LoadDatabase(pfile);
     AttValPair mince("job", "fervor");
-    vector<string> vect = mb.FindMatchingMembers(mince);
+    vector<string> vect = kb.FindMatchingMembers(mince);
     for (int i = 0; i < vect.size(); i++) {
-        cout << vect[i] << endl;
+        cout << vect[i] << "%" << endl;
     }
     //mems.txt contains 9 members
+    std::cout << "----------------- testing dupe traits ------------" << std::endl;
+    //testing if vector contains dupes
+    AttributeTranslator bt;
+    const string bfile = "trans.txt";
+    bt.Load(bfile);
+    AttValPair mice("favorite_food", "del taco");
+    vector<AttValPair> vs = bt.FindCompatibleAttValPairs(mice);
+    for (int i = 0; i < vs.size(); i++) {
+        cout << vs[i].attribute << " " << vs[i].value << endl;
+    }
+
+    //testing if there are duplicate matches
+    MemberDatabase ab;
+    const string gfile = "mems.txt";
+    ab.LoadDatabase(gfile);
+    MatchMaker bruh(ab, bt);
+    vector<EmailCount> jump = bruh.IdentifyRankedMatches("muk@gmail.com", 1);
+    for (int k = 0; k != jump.size(); k++) {
+        std::cout << jump[k].email << " --> " << jump[k].count << std::endl;
+    }
 }*/

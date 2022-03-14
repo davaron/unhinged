@@ -1,6 +1,11 @@
 favorite_food,del taco,favorite_food,del taco
 favorite_food,del taco,favorite_food,mexican
-favorite_food,blaze pizza,favorite_food,del tacow
 favorite_food,del taco,occupation,del taco employee
-favorite_food,taco bell,favorite_food,del taco
 favorite_food,del taco,favorite_food,mexican
+favorite_food,taco bell,favorite_food,del taco
+favorite_food,blaze pizza,favorite_food,del taco
+fuk,me,fuk,me
+monkey,t,fuk,me
+trait,dumb,job,chef
+trait,dumb,fuk,me
+job,fervor,job,chef

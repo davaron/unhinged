@@ -21,6 +21,7 @@ private:
 	RadixTree<PersonProfile*> m_database;
 	RadixTree<std::vector<std::string>> m_emailTree;
 	void AddPair(const std::string email, const AttValPair& attval);
+	std::vector<PersonProfile*> deleteProfiles;
 };
 
 

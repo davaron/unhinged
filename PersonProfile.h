@@ -3,7 +3,7 @@
 #include <string>
 //STORE AS STRINGS AND USE STRING PROCESSORS TO DIVIDE BETWEEN ATTRIBUTE AND VALUE FASTER THIS WAY TRUST
 //deal with duplicate traits
-#include <list>
+#include <unordered_set>
 #include <vector>
 #include "RadixTree.h"
 #include "provided.h"
@@ -26,7 +26,7 @@ private:
 	std::string m_name;
 	std::string m_email;
 	int numAttVals;
-	RadixTree<std::list<AttValPair>> attTree;
+	RadixTree<std::unordered_set<std::string>> attTree;
 	std::vector<AttValPair> attVec;
 };
 #endif

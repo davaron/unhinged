@@ -1,31 +1,5 @@
-﻿  AttributeTranslator.cpp
-C:\CS32\project4unhinged\project4unhinged\AttributeTranslator.cpp(15,22): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(95,20): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(71): message : while compiling class template member function 'void RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::insertHere(RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *,RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *)'
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(61): message : see reference to function template instantiation 'void RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::insertHere(RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *,RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *)' being compiled
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(34): message : while compiling class template member function 'RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::RadixTree(void)'
-C:\CS32\project4unhinged\project4unhinged\AttributeTranslator.h(10): message : see reference to function template instantiation 'RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::RadixTree(void)' being compiled
-C:\CS32\project4unhinged\project4unhinged\AttributeTranslator.h(16): message : see reference to class template instantiation 'RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>' being compiled
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(133,23): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(150,23): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(150,61): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(182,20): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(174): message : while compiling class template member function 'ValueType *RadixTree<ValueType>::searchFromHere(std::string,RadixTree<ValueType>::TreeNode *) const'
-          with
-          [
-              ValueType=std::list<AttValPair,std::allocator<AttValPair>>
-          ]
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(67): message : see reference to function template instantiation 'ValueType *RadixTree<ValueType>::searchFromHere(std::string,RadixTree<ValueType>::TreeNode *) const' being compiled
-          with
-          [
-              ValueType=std::list<AttValPair,std::allocator<AttValPair>>
-          ]
-  MatchMaker.cpp
-C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(30,20): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(32,21): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(41,21): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\MatchMaker.cpp(48,20): warning C4018: '<': signed/unsigned mismatch
-  MemberDatabase.cpp
+﻿  MemberDatabase.cpp
+C:\CS32\project4unhinged\project4unhinged\MemberDatabase.cpp(5,20): warning C4018: '<': signed/unsigned mismatch
 C:\CS32\project4unhinged\project4unhinged\MemberDatabase.cpp(43,23): warning C4018: '<': signed/unsigned mismatch
 C:\CS32\project4unhinged\project4unhinged\RadixTree.h(95,20): warning C4018: '<': signed/unsigned mismatch
 C:\CS32\project4unhinged\project4unhinged\RadixTree.h(71): message : while compiling class template member function 'void RadixTree<PersonProfile *>::insertHere(RadixTree<PersonProfile *>::TreeNode *,RadixTree<PersonProfile *>::TreeNode *)'
@@ -47,31 +21,9 @@ C:\CS32\project4unhinged\project4unhinged\RadixTree.h(67): message : see referen
           [
               ValueType=PersonProfile *
           ]
-  PersonProfile.cpp
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(95,20): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(71): message : while compiling class template member function 'void RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::insertHere(RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *,RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *)'
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(61): message : see reference to function template instantiation 'void RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::insertHere(RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *,RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::TreeNode *)' being compiled
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(34): message : while compiling class template member function 'RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::RadixTree(void)'
-C:\CS32\project4unhinged\project4unhinged\PersonProfile.h(12): message : see reference to function template instantiation 'RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>::RadixTree(void)' being compiled
-C:\CS32\project4unhinged\project4unhinged\PersonProfile.h(28): message : see reference to class template instantiation 'RadixTree<std::list<AttValPair,std::allocator<AttValPair>>>' being compiled
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(133,23): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(150,23): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(150,61): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(182,20): warning C4018: '<': signed/unsigned mismatch
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(174): message : while compiling class template member function 'ValueType *RadixTree<ValueType>::searchFromHere(std::string,RadixTree<ValueType>::TreeNode *) const'
-          with
-          [
-              ValueType=std::list<AttValPair,std::allocator<AttValPair>>
-          ]
-C:\CS32\project4unhinged\project4unhinged\RadixTree.h(67): message : see reference to function template instantiation 'ValueType *RadixTree<ValueType>::searchFromHere(std::string,RadixTree<ValueType>::TreeNode *) const' being compiled
-          with
-          [
-              ValueType=std::list<AttValPair,std::allocator<AttValPair>>
-          ]
-  main.cpp
   Generating code
-  88 of 769 functions (11.4%) were compiled, the rest were copied from previous compilation.
-    9 functions were new in current compilation
-    105 functions had inline decision re-evaluated but remain unchanged
+  2 of 841 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   project4unhinged.vcxproj -> C:\CS32\project4unhinged\Release\project4unhinged.exe

@@ -2,11 +2,9 @@
 #include <iostream>
 
 MemberDatabase::~MemberDatabase() {
-	/*map<string, PersonProfile*>::const_iterator it = m_database.begin();
-	while (it != m_database.end()) {
-		delete it->second;
-		it = m_database.erase(it);
-	}*/
+	for (int i = 0; i < deleteProfiles.size(); i++) {
+		delete deleteProfiles[i];
+	}
 }
 bool MemberDatabase::LoadDatabase(std::string filename) {
 	std::ifstream file(filename);
@@ -17,24 +15,25 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
 			std::string name;
 			std::string email;
 			int numAttribs = 0;
-			for(int i = 0; i < 3; i++){
+			for (int i = 0; i < 3; i++) {
 				switch (i) {
-					case 0:
-						name = str;
-						break;
-					case 1:
-						email = str;
-						break;
-					case 2:
-						numAttribs = stoi(str);
-						if (numAttribs < 0) {
-							return false;
-						}
-						break;
+				case 0:
+					name = str;
+					break;
+				case 1:
+					email = str;
+					break;
+				case 2:
+					numAttribs = stoi(str);
+					if (numAttribs < 0) {
+						return false;
+					}
+					break;
 				}
 				getline(file, str);
 			}
 			PersonProfile* prof = new PersonProfile(name, email);
+			deleteProfiles.push_back(prof);
 			for (int i = 0; i < numAttribs; i++) {
 				std::string attrib;
 				std::string val;
@@ -64,7 +63,7 @@ bool MemberDatabase::LoadDatabase(std::string filename) {
 				PersonProfile** pa = (m_database.search(email));
 				if ((*pa)->GetEmail() == email) {
 					return false;
-				}		
+				}
 			}
 			m_database.insert(email, prof);
 		}

@@ -2,7 +2,7 @@
 #define _attributetranslator_
 #include <string>
 #include <vector>
-#include <list>
+#include <unordered_set>
 #include "RadixTree.h"
 #include "provided.h"
 class AttributeTranslator {
@@ -13,6 +13,6 @@ public:
 	bool Load(std::string filename);
 	std::vector<AttValPair> FindCompatibleAttValPairs(const AttValPair& source) const;
 private:
-	RadixTree<std::list<AttValPair>> compatTree;
+	RadixTree<std::unordered_set<std::string>> compatTree;
 };
 #endif

@@ -20,13 +20,16 @@ hobby,ferkin
 
 Muk Go
 muk@gmail.com
-3
+5
 job,fervor
 trait,dumb
 hobby,ferkin
+fuk,me
+monkey,t
 
 Loosey Goosey
 losegoes@gmail.com
-2
+3
 job,chef
 trait,nice
+fuk,me
