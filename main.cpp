@@ -1,4 +1,5 @@
 //main.cpp
+//#define _CRTDBG_MAP_ALLOC
 
 #include "PersonProfile.h"
 #include <iostream>
@@ -14,25 +15,27 @@ const std::string MEMBERS_FILE = "members.txt";
 const std::string TRANSLATOR_FILE = "translator.txt";
 
 bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at);
-
-int main() {
+void wholeProg() {
     MemberDatabase mdb;
     if (!mdb.LoadDatabase(MEMBERS_FILE))
     {
         std::cout << "Error loading " << MEMBERS_FILE << std::endl;
-        return 1;
+        return;
     }
     AttributeTranslator at;
     if (!at.Load(TRANSLATOR_FILE))
     {
         std::cout << "Error loading " << TRANSLATOR_FILE << std::endl;
-        return 1;
+        return;
     }
 
     while (findMatches(mdb, at))
         ;
 
     std::cout << "Happy dating!" << std::endl;
+}
+int main() {
+    wholeProg();
 }
 
 bool findMatches(const MemberDatabase& mdb, const AttributeTranslator& at)

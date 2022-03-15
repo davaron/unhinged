@@ -2,9 +2,13 @@
 #include <iostream>
 
 MemberDatabase::~MemberDatabase() {
-	for (int i = 0; i < deleteProfiles.size(); i++) {
+	//std::cout << "destructing member database" << std::endl;
+	for (int i = deleteProfiles.size()-1; i >= 0; i--) {
+		//std::cout << "deletin " << deleteProfiles[i]->GetEmail() << std::endl;
 		delete deleteProfiles[i];
+		deleteProfiles.erase(deleteProfiles.begin()+i);
 	}
+	deleteProfiles.clear();
 }
 bool MemberDatabase::LoadDatabase(std::string filename) {
 	std::ifstream file(filename);

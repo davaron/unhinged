@@ -1,10 +1,10 @@
 #ifndef _RADIXTREE_H_
 #define _RADIXTREE_H_
 
-#include <map>
-#include <list>
+#include <stack>
 #include <string>
 #include <iostream>
+
 template <typename ValueType>
 class RadixTree {
 public:
@@ -28,7 +28,7 @@ private:
 	TreeNode* root = nullptr;
 	void insertHere(TreeNode* addMe, TreeNode* n);
 	ValueType* searchFromHere(std::string key, TreeNode* n) const;
-	void postorderCleanUp(TreeNode* tempRoot);
+	std::stack<TreeNode*> nodeStack;
 };
 
 template<typename ValueType>
@@ -38,7 +38,10 @@ inline RadixTree<ValueType>::RadixTree() : root(nullptr)
 template<typename ValueType>
 inline RadixTree<ValueType>::~RadixTree()
 {
-	postorderCleanUp(root);
+	while (!nodeStack.empty()) {
+		delete nodeStack.top();
+		nodeStack.pop();
+	}
 }
 
 //assumes new node is unique
@@ -46,10 +49,13 @@ template<typename ValueType>
 inline void RadixTree<ValueType>::insert(std::string key, const ValueType& value)
 {
 	TreeNode* NodeToBeAdded = new TreeNode();
+	
+
 	NodeToBeAdded->key = key;
 	NodeToBeAdded->value = value;
 	NodeToBeAdded->hasValue = true;
 	TreeNode* here = root;
+	nodeStack.push(NodeToBeAdded);
 	insertHere(NodeToBeAdded, here);
 }
 template<typename ValueType>
@@ -65,10 +71,10 @@ inline void RadixTree<ValueType>::insertHere(TreeNode* addMe, TreeNode* n)
 	//tree is empty
 	if (root == nullptr) {
 		root = new TreeNode();
+		nodeStack.push(root);
 		(*root).edges[addMe->key[0]] = addMe;
 
 		//std::cout << (*root).key << " " << *(root->value.begin()) << std::endl;
-
 		return;
 	}
 	//if edge bucket is empty
@@ -106,6 +112,7 @@ inline void RadixTree<ValueType>::insertHere(TreeNode* addMe, TreeNode* n)
 		if (traverse->edges[addedKey[matchesUpTo]] == nullptr) {
 			//std::cout << "first1" << std::endl;
 			TreeNode* splicedNode = new TreeNode();
+			nodeStack.push(splicedNode);
 			splicedNode->key = addedKey.substr(matchesUpTo);
 			splicedNode->value = addMe->value;
 			splicedNode->hasValue = true;
@@ -115,6 +122,7 @@ inline void RadixTree<ValueType>::insertHere(TreeNode* addMe, TreeNode* n)
 		else if (traverse->edges[addedKey[matchesUpTo]] != nullptr) {
 			//std::cout << "first2" << std::endl;
 			TreeNode* temp = new TreeNode();
+			nodeStack.push(temp);
 			temp->key = (*addMe).key = addMe->key.substr(matchesUpTo);
 			temp->value = addMe->value;
 			temp->hasValue = true;
@@ -125,6 +133,7 @@ inline void RadixTree<ValueType>::insertHere(TreeNode* addMe, TreeNode* n)
 	else if (matchesUpTo < traverse->key.size() && matchesUpTo == addMe->key.size()) {
 		//std::cout << "second" << std::endl;
 		TreeNode* spliced = new TreeNode();
+		nodeStack.push(spliced);
 		spliced->key = traverse->key.substr(matchesUpTo);
 		for (int i = 0; i < 128; i++) {
 			spliced->edges[i] = traverse->edges[i];
@@ -142,9 +151,11 @@ inline void RadixTree<ValueType>::insertHere(TreeNode* addMe, TreeNode* n)
 	else if (matchesUpTo < traverse->key.size() && matchesUpTo < addMe->key.size()) {
 		//std::cout << "third" << std::endl;
 		TreeNode* central = new TreeNode();
+		nodeStack.push(central);
 		(*central).key = (*traverse).key.substr(0, matchesUpTo);
 		central->hasValue = false;
 		TreeNode* spliced = new TreeNode();
+		nodeStack.push(spliced);
 		spliced->key = traverse->key.substr(matchesUpTo);
 		for (int i = 0; i < 128; i++) {
 			spliced->edges[i] = traverse->edges[i];
@@ -187,17 +198,6 @@ inline ValueType* RadixTree<ValueType>::searchFromHere(std::string key, TreeNode
 	}
 	else {
 		return searchFromHere(key.substr(matchesUpTo), traverse);
-	}
-}
-template<typename ValueType>
-inline void RadixTree<ValueType>::postorderCleanUp(TreeNode* tempRoot) {
-	if (tempRoot != nullptr) {
-		for (int i = 0; i < 128; i++) {
-			if (tempRoot->edges[i] != nullptr) {
-				postorderCleanUp(tempRoot->edges[i]);
-			}
-		}
-		delete tempRoot;
 	}
 }
 #endif
