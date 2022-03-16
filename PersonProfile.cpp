@@ -1,5 +1,4 @@
 #include "PersonProfile.h"
-#include <iostream>
 bool PersonProfile::GetAttVal(int attribute_num, AttValPair& attval) const {
 	if (attribute_num >= numAttVals || attribute_num < 0) {
 		return false;

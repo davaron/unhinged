@@ -1,5 +1,4 @@
 #include "MemberDatabase.h"
-#include <iostream>
 
 MemberDatabase::~MemberDatabase() {
 	//std::cout << "destructing member database" << std::endl;

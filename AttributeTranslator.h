@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <fstream>
+#include <algorithm>
 #include "RadixTree.h"
 #include "provided.h"
 class AttributeTranslator {

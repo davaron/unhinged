@@ -1,9 +1,4 @@
 #include "MatchMaker.h"
-#include <algorithm>
-#include <vector>
-#include <unordered_set>
-#include <map>
-#include <iostream>
 bool operator<(const EmailCount& lhs, const EmailCount& rhs) {
 	if (lhs.count < rhs.count) {
 		return true;

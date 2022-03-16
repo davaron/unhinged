@@ -13,23 +13,19 @@ trait,dumb
 
 Jun Taka
 jumpa@gmail.com
-3
-job,fervor
+2
+job,librarian
 trait,evil
-hobby,ferkin
 
 Muk Go
 muk@gmail.com
-5
-job,fervor
+2
+job,librarian
 trait,dumb
-hobby,ferkin
-fuk,me
-monkey,t
 
 Loosey Goosey
 losegoes@gmail.com
 3
 job,chef
 trait,nice
-fuk,me
+hobby,dancing

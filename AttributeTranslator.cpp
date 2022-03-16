@@ -1,13 +1,12 @@
-#include "provided.h"
 #include "AttributeTranslator.h"
-#include <fstream>
-#include <algorithm>
 
-#include <iostream>
+//#include <iostream>
 bool AttributeTranslator::Load(std::string filename) {
 	std::ifstream file(filename);
 	std::string str;
+	int linesLoaded = 0;
 	while (getline(file, str)) {
+		linesLoaded++;
 		if (str != "\n" && str.length() > 0) {
 			int firstLetter = 0;
 			std::string sAtt, sVal, cAtt, cVal;
@@ -54,7 +53,12 @@ bool AttributeTranslator::Load(std::string filename) {
 			}
 		}
 	}
-	return true;
+	if (linesLoaded > 0) {
+		return true;
+	}
+	else {
+		return false;
+	}	
 }
 
 std::vector<AttValPair> AttributeTranslator::FindCompatibleAttValPairs(const AttValPair& source) const{

@@ -10,7 +10,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <unordered_set>
+#include <cassert>
+#include <map>
 const std::string MEMBERS_FILE = "members.txt";
 const std::string TRANSLATOR_FILE = "translator.txt";
 
@@ -89,8 +91,8 @@ using namespace std;
 /*int main() {
     //test person profile
     PersonProfile y("Dave", "davertito@gmail.com");
-    std::cout << y.GetName() << std::endl;
-    std::cout << y.GetEmail() << std::endl;
+    assert(y.GetName() == "Dave");
+    assert(y.GetEmail() == "davertito@gmail.com");
     AttValPair a("hobby", "dancing");
     AttValPair b("hobby", "sitting");
     AttValPair c("hobby", "basketweaving");
@@ -105,39 +107,51 @@ using namespace std;
     y.AddAttValPair(e);
     y.AddAttValPair(f);
     y.AddAttValPair(j);
+    assert(y.GetNumAttValPairs() == 7);
+    y.AddAttValPair(a);
+    assert(y.GetNumAttValPairs() == 7);
     AttValPair d("jobbr", "yobb");
     y.GetAttVal(0, d);
-    std::cout << d.attribute << ", " << d.value << endl;
+    assert(d.attribute == "hobby" && d.value == "dancing");
     y.GetAttVal(1, d);
-    cout << d.attribute << ", " << d.value << endl;
+    assert(d.attribute == "hobby" && d.value == "sitting");
     y.GetAttVal(2, d);
-    cout << d.attribute << ", " << d.value << endl;
+    assert(d.attribute == "hobby" && d.value == "basketweaving");
     y.GetAttVal(3, d);
-    cout << d.attribute << ", " << d.value << endl;
+    assert(d.attribute == "trait" && d.value == "evil");
     y.GetAttVal(4, d);
-    cout << d.attribute << ", " << d.value << endl;
+    assert(d.attribute == "occupation" && d.value == "fisherman");
     y.GetAttVal(5, d);
-    cout << d.attribute << ", " << d.value << endl;
+    assert(d.attribute == "occupation" && d.value == "janitor");
     y.GetAttVal(6, d);
-    cout << d.attribute << ", " << d.value << endl;
-    cout << y.GetNumAttValPairs() << endl; //6
+    assert(d.attribute == "trait" && d.value == "salacious");
+    assert(y.GetNumAttValPairs() == 7);
     cout << "-------------END OF PERSONPROFILE TESTING------------" << endl;
     //test AttributeTranslator
     AttributeTranslator at;
     const string afile = "translator.txt";
+    assert(at.Load("transl.txt") == false);
     if (!at.Load(afile))
     {
         cout << "Error loading " << afile << endl;
         return 1;
     }
-    AttValPair sourcer("job", "architect");
-    vector<AttValPair> vl = at.FindCompatibleAttValPairs(sourcer);
+    AttValPair sourcer("job", "chef");
+    AttValPair source("trait", "obnoxious");
+    std::map<string, AttValPair> attPair;
+    AttValPair bowling("hobby", "bowling");
+    AttValPair historian("job", "historian");
+    attPair.insert({ "hobby", bowling });
+    attPair.insert({ "job", historian });
+    vector<AttValPair> vl = at.FindCompatibleAttValPairs(source);
+    assert(vl.size() == 2);
     for (int i = 0; i < vl.size(); i++) {
-        cout << vl[i].attribute << " " << vl[i].value << endl;
+        assert(attPair.find(vl[i].attribute)->second.value == "bowling" || attPair.find(vl[i].attribute)->second.value == "historian");
     }
     cout << "------------------- yay finished ------------------------" << endl;
     MemberDatabase mb;
     const string mfile = "members.txt";
+    assert(mb.LoadDatabase(mfile) && !mb.LoadDatabase("membs.txt"));
     if (!mb.LoadDatabase(mfile)) {
         cout << "Error loading " << mfile << endl;
         return 1;
@@ -152,10 +166,10 @@ using namespace std;
     MemberDatabase kb;
     const string pfile = "mems.txt";
     kb.LoadDatabase(pfile);
-    AttValPair mince("job", "fervor");
+    AttValPair mince("job", "librarian");
     vector<string> vect = kb.FindMatchingMembers(mince);
     for (int i = 0; i < vect.size(); i++) {
-        cout << vect[i] << "%" << endl;
+        cout << vect[i] << endl;
     }
     //mems.txt contains 9 members
     std::cout << "----------------- testing dupe traits ------------" << std::endl;
